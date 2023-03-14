@@ -1,0 +1,19 @@
+<h4>Items the category contains:</h4>
+  <ul>
+  @foreach(Item item in Model.Items)
+  {
+    string tags = "";
+    @if(item.JoinEntities.Count == 0)
+    {
+      tags = "This item does not have any tags.";
+    }
+    else
+    {
+      List<string> tagList = new List<string>();
+      @foreach(ItemTag join in item.JoinEntities)
+      {
+        tagList.Add(join.Tag.Title);
+      }
+      tags = String.Join(", ", tagList);
+    }
+    <li>@item.Description | Tags: @tags</li>
